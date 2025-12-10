@@ -1,0 +1,21 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: example-package
+  annotations:
+    config.kubernetes.io/local-config: "true"
+info:
+  description: A simple example KPT package
+  site: https://github.com/mane-tv2/example-package
+  keywords: 
+    - example
+    - demo
+  emails:
+    - maintainer@example.com
+pipeline:
+  mutators:
+    - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+      configMap:
+        namespace: my-namespace
+  validators:
+    - image: gcr.io/kpt-fn/kubeval:v0.3.0
